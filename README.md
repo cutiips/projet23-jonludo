@@ -6,7 +6,7 @@
 
 <img src="public/national_league.png" align="right" width="100" heigth="100" />
 
-# 🏒 Description du projet
+# Description du projet
 
 Notre projet est un site internet regroupant les matchs, le calendrier, le classement et les statistiques d'équipes de la Ligue nationale suisse de hockey sur glace. Notre but était de créer un site ayant une architecture visuelle moderne, un contenu dynamique et à jour, ainsi qu'une prise en main facile.
 
@@ -116,7 +116,7 @@ P --> R
 -   NHL API (gitlab) : https://gitlab.com/dword4/nhlapi
 
 
-# 🏒 Project description
+# Project description
 
 Our project is a website featuring games, schedules, standings and statistics for teams in the Swiss National Ice Hockey League. Our goal was to create a site with a modern visual architecture, dynamic and up-to-date content, and ease of use.
 
