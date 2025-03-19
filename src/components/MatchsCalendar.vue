@@ -105,11 +105,11 @@ export default {
                 params: {
                     league: "51",
                     date: this.getCurrentDate(),
-                    season: "2023"
+                    season: "2024"
                 },
                 headers: {
-                    "X-RapidAPI-Key": "XXX",
-                    "X-RapidAPI-Host": "XXX"
+                    "X-RapidAPI-Key": import.meta.env.VITE_API_KEY,
+                    "X-RapidAPI-Host": "api-hockey.p.rapidapi.com"
                 }
             };
 
@@ -130,11 +130,11 @@ export default {
                 params: {
                     league: "51",
                     date: this.selectedDate || this.getCurrentDate(),
-                    season: "2023"
+                    season: "2024"
                 },
                 headers: {
-                    "X-RapidAPI-Key": "XXX",
-                    "X-RapidAPI-Host": "XXX"
+                    "X-RapidAPI-Key": import.meta.env.VITE_API_KEY,
+                    "X-RapidAPI-Host": "api-hockey.p.rapidapi.com"
                 }
             };
 

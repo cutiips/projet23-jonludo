@@ -2,83 +2,85 @@
     <div class="container-fluid">
         <div class="display-container">
             <h2 class="mb-4">Statistiques des équipes</h2>
-            <div style="overflow: auto;">
-            <div v-if="details.length > 0">
-                <div id="upperPage" class="d-flex mb-4 gap-5">
-                    <label for="teamSelector" class="form-label">Sélectionnez une équipe :</label>
-                    <select id="teamSelector" v-model="selectedTeam" @change="refreshData" class="form-select">
-                        <option value="Toutes" selected>Toutes les équipes</option>
-                        <option v-for="team in details" :key="team.team.id" :value="team.team.id">
-                            {{ team.team.name }}
-                        </option>
-                    </select>
-                    <button @click="resetSelection" class="btn btn-dark btn-rounded">Réinitialiser la sélection</button>
+            <div style="overflow: auto">
+                <div v-if="details.length > 0">
+                    <div id="upperPage" class="d-flex mb-4 gap-5">
+                        <label for="teamSelector" class="form-label">Sélectionnez une équipe :</label>
+                        <select id="teamSelector" v-model="selectedTeam" @change="refreshData" class="form-select">
+                            <option value="Toutes" selected>Toutes les équipes</option>
+                            <option v-for="team in details" :key="team.team.id" :value="team.team.id">
+                                {{ team.team.name }}
+                            </option>
+                        </select>
+                        <button @click="resetSelection" class="btn btn-dark btn-rounded">
+                            Réinitialiser la sélection
+                        </button>
+                    </div>
+                    <table class="table table-responsive">
+                        <thead>
+                            <tr>
+                                <th scope="col">
+                                    <button @click="sortByPos" class="btn btn-dark btn-rounded">Pos.</button>
+                                </th>
+                                <th scope="col">
+                                    <button @click="sortByTeamName" class="btn btn-dark btn-rounded">Équipe</button>
+                                </th>
+                                <th scope="col">
+                                    <button @click="sortByGamesPlayed" class="btn btn-dark btn-rounded">
+                                        Matchs joués
+                                    </button>
+                                </th>
+                                <th scope="col">
+                                    <button @click="sortByPoints" class="btn btn-dark btn-rounded">Points</button>
+                                </th>
+                                <th scope="col">
+                                    <button @click="sortByVictories" class="btn btn-dark btn-rounded">Victoires</button>
+                                </th>
+                                <th scope="col">
+                                    <button @click="sortByDefeats" class="btn btn-dark btn-rounded">Défaites</button>
+                                </th>
+                                <th scope="col">
+                                    <button @click="sortByGoalsScored" class="btn btn-dark btn-rounded">
+                                        Buts marqués
+                                    </button>
+                                </th>
+                                <th scope="col">
+                                    <button @click="sortByGoalsConceded" class="btn btn-dark btn-rounded">
+                                        Buts encaissés
+                                    </button>
+                                </th>
+                                <th scope="col">
+                                    <button @click="sortByDifferential" class="btn btn-dark btn-rounded">
+                                        Différentiel
+                                    </button>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr v-for="row in details" :key="row.team.id">
+                                <th scope="row">{{ row.position }}</th>
+                                <td>
+                                    <div class="team-info">
+                                        <img :src="row.team.logo" alt="logo de l'équipe" class="team-logo" />
+                                        <span class="team-name">{{ row.team.name }}</span>
+                                    </div>
+                                </td>
+                                <td>{{ row.games.played }}</td>
+                                <td>{{ row.points }}</td>
+                                <td>{{ row.games.win.total + row.games.win_overtime.total }}</td>
+                                <td>{{ row.games.lose.total + row.games.lose_overtime.total }}</td>
+                                <td>{{ row.goals.for }}</td>
+                                <td>{{ row.goals.against }}</td>
+                                <td>{{ row.goals.for - row.goals.against }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
-                <table class="table table-responsive">
-                    <thead>
-                        <tr>
-                            <th scope="col">
-                                <button @click="sortByPos" class="btn btn-dark btn-rounded">Pos.</button>
-                            </th>
-                            <th scope="col">
-                                <button @click="sortByTeamName" class="btn btn-dark btn-rounded">Équipe</button>
-                            </th>
-                            <th scope="col">
-                                <button @click="sortByGamesPlayed" class="btn btn-dark btn-rounded">
-                                    Matchs joués
-                                </button>
-                            </th>
-                            <th scope="col">
-                                <button @click="sortByPoints" class="btn btn-dark btn-rounded">Points</button>
-                            </th>
-                            <th scope="col">
-                                <button @click="sortByVictories" class="btn btn-dark btn-rounded">Victoires</button>
-                            </th>
-                            <th scope="col">
-                                <button @click="sortByDefeats" class="btn btn-dark btn-rounded">Défaites</button>
-                            </th>
-                            <th scope="col">
-                                <button @click="sortByGoalsScored" class="btn btn-dark btn-rounded">
-                                    Buts marqués
-                                </button>
-                            </th>
-                            <th scope="col">
-                                <button @click="sortByGoalsConceded" class="btn btn-dark btn-rounded">
-                                    Buts encaissés
-                                </button>
-                            </th>
-                            <th scope="col">
-                                <button @click="sortByDifferential" class="btn btn-dark btn-rounded">
-                                    Différentiel
-                                </button>
-                            </th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr v-for="row in details" :key="row.team.id">
-                            <th scope="row">{{ row.position }}</th>
-                            <td>
-                                <div class="team-info">
-                                    <img :src="row.team.logo" alt="logo de l'équipe" class="team-logo" />
-                                    <span class="team-name">{{ row.team.name }}</span>
-                                </div>
-                            </td>
-                            <td>{{ row.games.played }}</td>
-                            <td>{{ row.points }}</td>
-                            <td>{{ row.games.win.total + row.games.win_overtime.total }}</td>
-                            <td>{{ row.games.lose.total + row.games.lose_overtime.total }}</td>
-                            <td>{{ row.goals.for }}</td>
-                            <td>{{ row.goals.against }}</td>
-                            <td>{{ row.goals.for - row.goals.against }}</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-            <div v-else>
-                <p>Aucun détail de classement disponible pour le moment.</p>
+                <div v-else>
+                    <p>Aucun détail de classement disponible pour le moment.</p>
+                </div>
             </div>
         </div>
-            </div>
     </div>
 </template>
 
@@ -115,10 +117,10 @@ export default {
                 url: "https://api-hockey.p.rapidapi.com/standings",
                 params: {
                     league: "51",
-                    season: "2023"
+                    season: "2024"
                 },
                 headers: {
-                    "X-RapidAPI-Key": "XXX",
+                    "X-RapidAPI-Key": import.meta.env.VITE_API_KEY,
                     "X-RapidAPI-Host": "api-hockey.p.rapidapi.com"
                 }
             };

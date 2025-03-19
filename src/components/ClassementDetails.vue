@@ -73,11 +73,11 @@ export default {
                 url: "https://api-hockey.p.rapidapi.com/standings",
                 params: {
                     league: "51",
-                    season: "2023"
+                    season: "2024"
                 },
                 headers: {
-                    "X-RapidAPI-Key": "XXX",
-                    "X-RapidAPI-Host": "XXX"
+                    "X-RapidAPI-Key": import.meta.env.VITE_API_KEY,
+                    "X-RapidAPI-Host": "api-hockey.p.rapidapi.com"
                 }
             };
 

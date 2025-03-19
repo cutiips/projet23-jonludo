@@ -65,8 +65,8 @@ export default {
                 method: "GET",
                 url: apiUrl,
                 headers: {
-                    "X-RapidAPI-Key": "XXX",
-                    "X-RapidAPI-Host": "XXX"
+                    "X-RapidAPI-Key": import.meta.env.VITE_API_KEY,
+                    "X-RapidAPI-Host": "api-hockey.p.rapidapi.com"
                 }
             };
 
